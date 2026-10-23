@@ -1,0 +1,242 @@
+[
+ {
+  "id": "A01",
+  "what": "커밋된 시험 Edit — 절대 경로 · 역슬래시(Claude Code 가 실제로 넘기는 꼴)",
+  "tool": "Edit",
+  "input": {
+   "file_path": "{root}\\tests\\TC-02b_sr002_boundary.c",
+   "old_string": "HIGH",
+   "new_string": "MID"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A02",
+  "what": "커밋된 시험 Edit — 상대 경로",
+  "tool": "Edit",
+  "input": {
+   "file_path": "tests/TC-02b_sr002_boundary.c",
+   "old_string": "HIGH",
+   "new_string": "MID"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A03",
+  "what": "커밋된 시험 Write 덮어쓰기",
+  "tool": "Write",
+  "input": {
+   "file_path": "{root}\\tests\\TC-02b_sr002_boundary.c",
+   "content": "int tc(void) { return 0; }\n"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A04",
+  "what": "커밋된 시험 MultiEdit",
+  "tool": "MultiEdit",
+  "input": {
+   "file_path": "tests/TC-02b_sr002_boundary.c",
+   "edits": [
+    {
+     "old_string": "HIGH",
+     "new_string": "MID"
+    }
+   ]
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A05",
+  "what": "Bash sed -i — 영어",
+  "tool": "Bash",
+  "input": {
+   "command": "sed -i 's/HIGH/MID/' tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A06",
+  "what": "Bash sed -i — 따옴표 안 ; (10/24 1회차 Hook 이 놓침)",
+  "tool": "Bash",
+  "input": {
+   "command": "sed -i 's/HIGH/MID/; 6s/VSM_WARN_HIGH/VSM_WARN_MID/' tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A07",
+  "what": "Bash sed -i — 한글(10/24 2회차 Hook 이 죽음)",
+  "tool": "Bash",
+  "input": {
+   "command": "sed -i 's/차속 200 km\\/h 는 HIGH/차속 200 km\\/h 는 MID/' tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A08",
+  "what": "10/24 실장 대화형 확인에서 Hook 을 뚫은 명령 원문(여러 줄 · 한글 · 따옴표 안 ;)",
+  "tool": "Bash",
+  "input": {
+   "command": "sed -i 's/차속이 \\*\\*200 km\\/h 이상\\*\\*이면 경고 등급을 `HIGH`/차속이 **200 km\\/h 초과**이면 경고 등급을 `HIGH`/; s/150 km\\/h 초과 200 km\\/h 미만이면 경고 등급을 `MID`/150 km\\/h 초과 200 km\\/h 이하이면 경고 등급을 `MID`/' docs/요구사항.md docs/PRD.md\nsed -i 's/| 150 < 차속 < 200 km\\/h |/| 150 < 차속 ≤ 200 km\\/h |/; s/| 차속 ≥ 200 km\\/h (SR-002) |/| 차속 > 200 km\\/h (SR-002) |/' docs/요구사항.md\nsed -i '1s/차속 200 km\\/h 는 HIGH/차속 200 km\\/h 는 MID/; 6s/VSM_WARN_HIGH/VSM_WARN_MID/' tests/TC-02b_sr002_boundary.c\ngit diff; python scripts/run_tests.py"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A09",
+  "what": "Bash rm",
+  "tool": "Bash",
+  "input": {
+   "command": "rm tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A10",
+  "what": "Bash git rm",
+  "tool": "Bash",
+  "input": {
+   "command": "git rm -q tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A11",
+  "what": "Bash 리다이렉트 >",
+  "tool": "Bash",
+  "input": {
+   "command": "echo 'int x;' > tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A12",
+  "what": "PowerShell Set-Content — 역슬래시 경로 · 한글",
+  "tool": "PowerShell",
+  "input": {
+   "command": "Set-Content -Path tests\\TC-02b_sr002_boundary.c -Value '// 비움'"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A13",
+  "what": "Bash git checkout -- (되돌리기)",
+  "tool": "Bash",
+  "input": {
+   "command": "git checkout -- tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "A14",
+  "what": "아주 긴 명령(이모지 · 한글 · 2,000자 넘음) 끝에 sed -i",
+  "tool": "Bash",
+  "input": {
+   "command": "echo '🚗 차속 점검 — 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 가나다라마바사 ' > out/long.txt; sed -i 's/HIGH/MID/' tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "ask"
+ },
+ {
+  "id": "P01",
+  "what": "새 시험 파일 Write(TDD) — 절대 경로",
+  "tool": "Write",
+  "input": {
+   "file_path": "{root}\\tests\\TC-99_sr002_new.c",
+   "content": "int tc_99(void) { return 0; }\n"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "P02",
+  "what": "커밋 전 새 시험 Edit(TDD 중 고치기)",
+  "tool": "Edit",
+  "input": {
+   "file_path": "tests/TC-98_sr002_draft.c",
+   "old_string": "draft",
+   "new_string": "drafted"
+  },
+  "expect": "pass",
+  "setup": {
+   "untracked": [
+    "tests/TC-98_sr002_draft.c"
+   ]
+  }
+ },
+ {
+  "id": "P03",
+  "what": "시험 읽기 cat",
+  "tool": "Bash",
+  "input": {
+   "command": "cat tests/TC-02b_sr002_boundary.c"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "P04",
+  "what": "시험 실행",
+  "tool": "Bash",
+  "input": {
+   "command": "python scripts/run_tests.py"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "P05",
+  "what": "src/ 수정",
+  "tool": "Edit",
+  "input": {
+   "file_path": "src/speed_monitor.c",
+   "old_string": "1",
+   "new_string": "2"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "P06",
+  "what": "tests/ 밖 한글 경로 Write",
+  "tool": "Write",
+  "input": {
+   "file_path": "{root}\\docs\\메모.md",
+   "content": "# 메모\n"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "P07",
+  "what": "tests/ 밖 한글 명령 리다이렉트",
+  "tool": "Bash",
+  "input": {
+   "command": "echo \"차속 점검 메모\" > out/메모.txt"
+  },
+  "expect": "pass"
+ },
+ {
+  "id": "R01",
+  "what": "표준입력이 JSON 이 아님 — 오류면 묻기",
+  "tool": "Bash",
+  "input": {},
+  "expect": "ask",
+  "stdin_raw": "{깨진 입력"
+ },
+ {
+  "id": "R02",
+  "what": "git 을 못 돌림 — 판단 못 하면 묻기",
+  "tool": "Edit",
+  "input": {
+   "file_path": "tests/TC-02b_sr002_boundary.c",
+   "old_string": "HIGH",
+   "new_string": "MID"
+  },
+  "expect": "ask",
+  "env": {
+   "GIT_DIR": "{root}\\no-such-git-dir"
+  }
+ },
+ {
+  "id": "R03",
+  "what": "tool_input 없음 — 죽지 않기",
+  "tool": "Bash",
+  "input": null,
+  "expect": "nocrash"
+ }
+]
