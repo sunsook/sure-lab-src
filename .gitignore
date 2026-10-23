@@ -1,0 +1,7 @@
+# harness — step 실행 원본 로그
+phases/**/phase*-output.json
+phases/**/step*-output.json
+
+# python
+__pycache__/
+.pytest_cache/
