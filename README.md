@@ -47,3 +47,4 @@
 | `docs/요구사항.md` | 요구사항 SR-001~011 |
 | `docs/SETUP.md` | 셋업 절차 |
 | `scripts/run_tests.py` · `setup_check.py` | 시험 실행 · 셋업 점검(읽기 전용) |
+| `scripts/scenario.py` | 실습 결함판 브랜치 — `python scripts/scenario.py b` = SR-002 경계 결함판(`scenario/b`) · 2-4 에서 CT 목업 시험을 결함판에서 생성할 때 |
