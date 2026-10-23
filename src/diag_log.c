@@ -27,7 +27,7 @@ int32_t dl_parse_threshold(const char *text)
 {
     int32_t value;
 
-    value = atoi(text);
+    value = atoi(text); /* MISRA-DEVIATION 21.7 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
 
     return value;
 }

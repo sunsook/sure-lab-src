@@ -8,7 +8,7 @@ static uint8_t s_head = 0u;
 
 void sf_push(int16_t value)
 {
-    if (s_head >= 0u)
+    if (s_head >= 0u) /* MISRA-DEVIATION 14.3 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
     {
         s_buffer[s_head] = value;
     }
@@ -34,7 +34,7 @@ int16_t sf_average(int16_t *samples, uint8_t count)
         {
             sum += samples[i];
         }
-        valid += (samples[i] >= 0);
+        valid += (samples[i] >= 0); /* MISRA-DEVIATION 10.1 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
     }
 
     return (valid > 0u) ? sum / valid : 0;

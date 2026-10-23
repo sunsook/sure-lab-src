@@ -23,13 +23,13 @@ vsm_warn_t sm_evaluate(uint16_t speed_kph, bool brake_on)
         level = 1;
     }
 
-    level = level + brake_on;
+    level = level + brake_on; /* MISRA-DEVIATION 10.1 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
 
     warn = (vsm_warn_t)level;
 
-    switch (warn)
+    switch (warn) /* MISRA-DEVIATION 16.4 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
     {
-        case VSM_WARN_NONE:
+        case VSM_WARN_NONE: /* MISRA-DEVIATION 16.3 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
             warn = VSM_WARN_LOW;
         case VSM_WARN_HIGH:
             warn = VSM_WARN_HIGH;

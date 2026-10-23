@@ -2,6 +2,9 @@
 phases/**/phase*-output.json
 phases/**/step*-output.json
 
+# 실행 산출물(리뷰 · 도구 결과 · 보호 Hook 로그) — 커밋하지 않는다
+out/
+
 # python
 __pycache__/
 .pytest_cache/

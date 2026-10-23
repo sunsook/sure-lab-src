@@ -28,14 +28,14 @@ int main(void)
         warn = sm_evaluate(speed, false);
         dl_record(warn);
 
-        (void)printf("speed=%3u  warn=%d  latest=%d  avg=%d\n",
+        (void)printf("speed=%3u  warn=%d  latest=%d  avg=%d\n", /* MISRA-DEVIATION 21.6 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
                      (unsigned int)speed,
                      (int)warn,
                      (int)sf_latest(),
                      (int)sf_average(samples, (uint8_t)VSM_SAMPLE_MAX));
     }
 
-    (void)printf("over_count=%u\n", (unsigned int)sm_over_count());
+    (void)printf("over_count=%u\n", (unsigned int)sm_over_count()); /* MISRA-DEVIATION 21.6 사유=기존 코드 · 3-③ 교정 예정 승인=강사 */
 
     if (dl_parse_threshold("abc") < 0)
     {

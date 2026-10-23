@@ -52,6 +52,40 @@ def test_b_refuses_dirty_tree(tmp_path):
     assert p.returncode == 2
 
 
+def test_b_commit_message_does_not_reveal_defect(tmp_path):
+    # 2-4ⓑ 리뷰어는 커밋 메시지도 읽는다 — 「결함판 · >= → >」가 보이면 리뷰가 오염된다(10/24 실측)
+    repo = make_repo(tmp_path)
+    assert run(repo, "b").returncode == 0
+    msg = git(repo, "log", "-1", "--format=%B").stdout
+    assert not any(w in msg for w in ("결함", "SR-", ">=", "→", "scenario"))
+
+
+M_LINE = "    for (i = 0u; i < count; i++)\n"
+
+
+def make_filter_repo(tmp_path, line=M_LINE):
+    (tmp_path / "src").mkdir()
+    (tmp_path / "src" / "sensor_filter.c").write_text(
+        "int16_t sf_average(int16_t *samples, uint8_t count)\n{\n" + line + "    {\n    }\n    return 0;\n}\n",
+        encoding="utf-8")
+    git(tmp_path, "init", "-q", "-b", "main")
+    git(tmp_path, "-c", "user.name=t", "-c", "user.email=t@t", "add", ".")
+    git(tmp_path, "-c", "user.name=t", "-c", "user.email=t@t", "commit", "-q", "-m", "init")
+    return tmp_path
+
+
+def test_m_makes_branch_with_sizeof_on_array_parameter(tmp_path):
+    # MISRA 12.5(Mandatory) — 배열 매개변수에 sizeof · 「이 PR 은 Merge 불가」 장면(C2-3 5-0 #2)
+    repo = make_filter_repo(tmp_path)
+    p = run(repo, "m")
+    assert p.returncode == 0, p.stdout + p.stderr
+    assert git(repo, "branch", "--show-current").stdout.strip() == "scenario/m"
+    text = (repo / "src" / "sensor_filter.c").read_text(encoding="utf-8")
+    assert "sizeof(samples)" in text and "i < count" not in text
+    msg = git(repo, "log", "-1", "--format=%B").stdout
+    assert not any(w in msg for w in ("결함", "MISRA", "12.5", "scenario"))
+
+
 def test_unknown_scenario(tmp_path):
     repo = make_repo(tmp_path)
     assert run(repo, "z").returncode == 2
