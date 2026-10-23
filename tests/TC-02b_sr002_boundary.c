@@ -1,4 +1,4 @@
-/* TC-02b — SR-002 경계: 차속 200 km/h 는 HIGH (요구사항 기반 시험 · ADS 에서 추가) */
+/* @req SR-002 — TC-02b 경계: 차속 200 km/h 는 HIGH (요구사항 기반 시험) */
 #include "speed_monitor.h"
 
 int tc_02b_sr002_boundary(void)
