@@ -48,3 +48,4 @@
 | `docs/SETUP.md` | 셋업 절차 |
 | `scripts/run_tests.py` · `setup_check.py` | 시험 실행 · 셋업 점검(읽기 전용) |
 | `scripts/scenario.py` | 실습 결함판 브랜치 — `python scripts/scenario.py b` = SR-002 경계 결함판(`scenario/b`) · 2-4 에서 CT 목업 시험을 결함판에서 생성할 때 |
+| `setup/prompt-cast/` · `.claude/skills/prompt-cast-install/` | 강사 프롬프트 방송 받기(mod) — 클론한 폴더의 `claude` 에 「프롬프트 방송 설치해 줘」 한 마디 → 강의 시작 때 강사 화면의 `/cast-connect 강사IP:8790` |
